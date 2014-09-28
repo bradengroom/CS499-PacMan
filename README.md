@@ -54,3 +54,10 @@ git push
 ```
 
 You will be asked for your github credentials.
+
+### Updating your local copy
+
+You can update your local copy by typing this:
+```
+git pull
+```
