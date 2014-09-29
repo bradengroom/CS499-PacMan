@@ -45,7 +45,7 @@ Now you will need to commit these changes to your local version of the project:
 git commit -a -m "YOUR MESSAGE"
 ```
 
-Make sure to type a meaningful commit in quotes.
+Make sure to type a descriptive commit message in quotes.
 
 Now all you need to do is push your local changes to the shared version of the project:
 
