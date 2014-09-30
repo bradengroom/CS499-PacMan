@@ -1,8 +1,9 @@
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class PelletTest {
+	
+	% Author: Jacinta Cai
 
 	@Test
 	public void isEaten() {
