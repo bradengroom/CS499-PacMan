@@ -3,7 +3,7 @@ import org.junit.Test;
 
 public class PelletTest {
 	
-	// Author: Jacinta Cai
+	// Author: Jacinta Cai 
 
 	@Test
 	public void isEaten() {
