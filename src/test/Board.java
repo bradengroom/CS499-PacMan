@@ -1,8 +1,21 @@
- public static void main(String[] args) {
-        int p = Integer.parseInt(args[0]);
-        Board b = new Maze(N);
-        StdDraw.show(0);
-        b.build();
-        
-        
-        }
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class BoardTest {
+
+	@Test
+	//creates a new board object
+	Board b = new Board();
+    
+    //build board
+	b.buildBoard();
+    
+   }
+	//Sheldon Dumas
+	
+	
+	
+	
+	
