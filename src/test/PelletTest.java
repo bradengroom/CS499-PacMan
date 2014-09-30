@@ -16,15 +16,20 @@ public class PelletTest {
 	
 	@Test
 	public void isScoreGained() {
-		Score score = new Score();
-		Pellet pellet = new Pellet();
-		
-		if (pellet.isEaten()) {
-			score.incScore();
-		}
-		
-		assert(score.isIncremented());
-		
+	        Score score = new Score();
+	        Pellet pellet = new Pellet();
+	       
+	        int initialScore = score.getScore();
+	 
+	        if (pellet.isEaten()) {
+	 	        int newScore = score.getScore();
+	 
+	                score.incScore();
+	 
+	                assert(newScore > initialScore);
+	        } else {
+	                assert(newScore == initialScore);
+	        }
 	}
 
 }
