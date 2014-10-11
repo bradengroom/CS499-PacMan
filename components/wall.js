@@ -7,6 +7,6 @@ Crafty.c("Wall", {
             .attr({
                 x: x,
                 y: y
-            })
+            });
     }
 });
