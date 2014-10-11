@@ -3,19 +3,18 @@ Crafty.c("Pacman", {
 
     create: function (x, y) {
 
-
-
         this.requires("2D, Canvas, pacmanRight1, Fourway, Collision, SpriteAnimation")
             .attr({
                 x: x,
                 y: y,
                 z: 1
             })
-        //allow the user to control pacman in 4 directions
-        .fourway(4)
-        //when pacman hits a pellet, destroy it
+        //allow the user to control pacman in 4 directions (speed of 2)
+        .fourway(2)
+        //when pacman hits a pellet, destroy it and play a munching sound
         .onHit("Pellet", function (ent) {
             ent[0].obj.destroy();
+            Crafty.audio.play('munch');
         })
         //when pacman hits a powerup, destroy it
         .onHit("PowerUp", function (ent) {
@@ -43,6 +42,7 @@ Crafty.c("Pacman", {
             }
         });
     },
+    
     animateDown: function () {
         this.reel('pacmanDown', 300, 10, 1, 2)
             .animate('pacmanDown', -1);

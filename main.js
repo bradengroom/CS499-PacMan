@@ -14,26 +14,29 @@ Crafty.sprite(spriteSize, "imgs/pacman-20.png", {
     powerUp: [12, 0]
 });
 
-
+//load audio files
+Crafty.audio.add({
+    munch: ['sounds/munch.wav']
+});
 
 //define our main scene
 Crafty.scene("main", function () {
-    
+
     //set the background color to black
     Crafty.background("#000000");
-    
+
     //load our level map
     loadMap("maps/level.map");
 });
 
 function loadMap(file) {
-    
+
     //get the level map file
     $.get(file, function (levelMap) {
-        
+
         //split the file by new lines and loop over each line
         $.each(levelMap.split("\n"), function (y, line) {
-            
+
             //split each line into characters and loop over each character
             $.each(line.split(""), function (x, char) {
 
@@ -59,4 +62,4 @@ function loadMap(file) {
 }
 
 //start the main scene
-Crafty.scene("main"); 
+Crafty.scene("main");
