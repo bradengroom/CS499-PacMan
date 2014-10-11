@@ -30,7 +30,7 @@ Crafty.c("Pacman", {
         })
         //make pacman move each frame
         .bind("EnterFrame", function () {
-
+            
             var moved = false;
             
             if (this.keyPressed !== null) {
@@ -82,6 +82,12 @@ Crafty.c("Pacman", {
             this.x -= speed;
         } else if (direction === Crafty.keys.RIGHT_ARROW) {
             this.x += speed;
+        }
+        
+        if (this.x <= -30) {
+            this.x += 410;
+        } else if (this.x >= 380) {
+            this.x -= 410;
         }
 
         //if we hit a wall
