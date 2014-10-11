@@ -11,8 +11,6 @@ Crafty.c("Pacman", {
                 x: x,
                 y: y
             })
-        //allow the user to control pacman in 4 directions (speed of 2)
-        //.multiway(2, {UP_ARROW: -90, DOWN_ARROW: 90, RIGHT_ARROW: 0, LEFT_ARROW: 180})
         //when pacman hits a pellet, destroy it and play a munching sound
         .onHit("Pellet", function (ent) {
             ent[0].obj.destroy();
@@ -30,9 +28,9 @@ Crafty.c("Pacman", {
         })
         //make pacman move each frame
         .bind("EnterFrame", function () {
-            
+
             var moved = false;
-            
+
             if (this.keyPressed !== null) {
                 moved = this.tryMove(this.keyPressed);
             }
@@ -83,11 +81,29 @@ Crafty.c("Pacman", {
         } else if (direction === Crafty.keys.RIGHT_ARROW) {
             this.x += speed;
         }
-        
-        if (this.x <= -30) {
-            this.x += 410;
-        } else if (this.x >= 380) {
-            this.x -= 410;
+
+        //if pacman goes off the left edge of the map
+        if (this.x <= 0 - this.w) {
+            //put him on the right edge
+            this.x += Crafty.viewport.width + this.w;
+
+            //if pacman goes off the right edge of the map
+        } else if (this.x >= Crafty.viewport.width + this.w) {
+            //put him on the left edge
+            this.x -= Crafty.viewport.width + 2 * this.w;
+        }
+
+        //if pacman goes off the top edge of the map
+        if (this.y <= 0 - this.h) {
+            
+            //put him on the bottom edge
+            this.y += Crafty.viewport.height + this.h;
+            
+            //if pacman goes off the bottom edge of the map
+        } else if (this.y >= Crafty.viewport.height + this.h) {
+            
+            //put him on the top edge
+            this.y -= Crafty.viewport.height + 2 * this.h;
         }
 
         //if we hit a wall

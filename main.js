@@ -1,22 +1,6 @@
 //define a sprite size
 var spriteSize = 20;
 
-//initialize our game.  We give it width, height, and the html element to pput the game in
-Crafty.init(19 * spriteSize, 21 * spriteSize, document.getElementById('game'));
-
-//load our sprites
-Crafty.sprite(spriteSize, "imgs/pacman-20.png", {
-    wall: [13, 3],
-    pacman: [10, 0],
-    ghost: [0, 0],
-    pellet: [12, 2],
-    powerUp: [12, 0],
-    blinky: [0, 0],
-    inky: [6, 0],
-    pinky: [4, 0],
-    clyde: [2, 0]
-});
-
 //load audio files
 Crafty.audio.add({
     munch: ['sounds/munch.wav']
@@ -25,23 +9,47 @@ Crafty.audio.add({
 //define our main scene
 Crafty.scene("main", function () {
 
+    //load our level map
+    loadMap("maps/level.map", initializeGame);
+});
+
+function initializeGame(width, height) {
+    //initialize our game.  We give it width, height, and the html element to pput the game in
+    Crafty.init(width * spriteSize, height * spriteSize, document.getElementById('game'));
+
     //set the background color to black
     Crafty.background("#000000");
 
-    //load our level map
-    loadMap("maps/level.map");
-});
+    //load our sprites
+    Crafty.sprite(spriteSize, "imgs/pacman-20.png", {
+        wall: [13, 3],
+        pacman: [10, 0],
+        ghost: [0, 0],
+        pellet: [12, 2],
+        powerUp: [12, 0],
+        blinky: [0, 0],
+        inky: [6, 0],
+        pinky: [4, 0],
+        clyde: [2, 0]
+    });
+}
 
-function loadMap(file) {
+function loadMap(file, callback) {
 
     //get the level map file
     $.get(file, function (levelMap) {
 
+        var lines = levelMap.split("\n")
+        
+        //call our callback with the height and width of the board.  This will call initializeGame
+        callback(lines[0].length, lines.length);
+
         //split the file by new lines and loop over each line
-        $.each(levelMap.split("\n"), function (y, line) {
+        $.each(lines, function (y, line) {
 
             //split each line into characters and loop over each character
             $.each(line.split(""), function (x, char) {
+
 
                 //set the x and y coordinates for the current item
                 var xCoord = x * spriteSize;
