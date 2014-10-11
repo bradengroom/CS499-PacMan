@@ -2,7 +2,7 @@
 Crafty.c("Pacman", {
 
     direction: null,
-    keyPressed: null,
+    keyPressed: Crafty.keys.LEFT_ARROW,
 
     create: function (x, y) {
 
@@ -22,33 +22,20 @@ Crafty.c("Pacman", {
         .onHit("PowerUp", function (ent) {
             ent[0].obj.destroy();
         })
-        //when packman moves, if he hits a wall, cancel the movement
-        /*        .bind('Moved', function (from) {
-            if (this.hit('Wall')) {
-                console.log('hit wall');
-                this.attr({
-                    x: from.x,
-                    y: from.y
-                });
-            }
-        })*/
         //when the user presses an arrow key, let's change the animation
         .bind("KeyDown", function (e) {
-            this.keyPressed = e.keyCode;
-            if (e.keyCode === Crafty.keys.DOWN_ARROW) {
-                this.animateDown();
-            } else if (e.keyCode === Crafty.keys.UP_ARROW) {
-                this.animateUp();
-            } else if (e.keyCode === Crafty.keys.LEFT_ARROW) {
-                this.animateLeft();
-            } else if (e.keyCode === Crafty.keys.RIGHT_ARROW) {
-                this.animateRight();
+            if (e.keyCode !== this.direction) {
+                this.keyPressed = e.keyCode;
             }
         })
         //make pacman move each frame
         .bind("EnterFrame", function () {
 
-            var moved = this.tryMove(this.keyPressed);
+            var moved = false;
+            
+            if (this.keyPressed !== null) {
+                moved = this.tryMove(this.keyPressed);
+            }
 
             //if we hit a wall
             if (!moved) {
@@ -59,25 +46,26 @@ Crafty.c("Pacman", {
             } else {
                 //if we did not hit a wall, this is our new direction
                 this.direction = this.keyPressed;
+                this.keyPressed = null;
+
+                this.updateAnimation();
             }
         });
     },
-
-    animateDown: function () {
-        this.reel('pacmanDown', 300, 10, 1, 2)
-            .animate('pacmanDown', -1);
-    },
-    animateUp: function () {
-        this.reel('pacmanUp', 300, 10, 3, 2)
-            .animate('pacmanUp', -1);
-    },
-    animateLeft: function () {
-        this.reel('pacmanLeft', 300, 10, 2, 2)
-            .animate('pacmanLeft', -1);
-    },
-    animateRight: function () {
-        this.reel('pacmanRight', 300, 10, 0, 2)
-            .animate('pacmanRight', -1);
+    updateAnimation: function () {
+        if (this.direction === Crafty.keys.DOWN_ARROW) {
+            this.reel('pacmanDown', 300, 10, 1, 2)
+                .animate('pacmanDown', -1);
+        } else if (this.direction === Crafty.keys.UP_ARROW) {
+            this.reel('pacmanUp', 300, 10, 3, 2)
+                .animate('pacmanUp', -1);
+        } else if (this.direction === Crafty.keys.LEFT_ARROW) {
+            this.reel('pacmanLeft', 300, 10, 2, 2)
+                .animate('pacmanLeft', -1);
+        } else if (this.direction === Crafty.keys.RIGHT_ARROW) {
+            this.reel('pacmanRight', 300, 10, 0, 2)
+                .animate('pacmanRight', -1);
+        }
     },
     tryMove: function (direction) {
 
