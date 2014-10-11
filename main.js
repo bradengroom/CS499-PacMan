@@ -7,8 +7,7 @@ Crafty.init(19 * spriteSize, 21 * spriteSize, document.getElementById('game'));
 //load our sprites
 Crafty.sprite(spriteSize, "imgs/pacman-20.png", {
     wall: [13, 3],
-    pacmanRight1: [10, 0],
-    pacmanRight2: [11, 0],
+    pacman: [10, 0],
     ghost: [0, 0],
     pellet: [12, 2],
     powerUp: [12, 0]

@@ -3,7 +3,7 @@ Crafty.c("Pacman", {
 
     create: function (x, y) {
 
-        this.requires("2D, Canvas, pacmanRight1, Fourway, Collision, SpriteAnimation")
+        this.requires("2D, Canvas, pacman, Fourway, Collision, SpriteAnimation")
             .attr({
                 x: x,
                 y: y,
