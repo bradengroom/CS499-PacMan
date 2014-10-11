@@ -3,7 +3,9 @@ Crafty.c("Pacman", {
 
     create: function (x, y) {
 
-        this.requires("2D, Canvas, pacman, Fourway, Collision")
+
+
+        this.requires("2D, Canvas, pacmanRight1, Fourway, Collision, SpriteAnimation")
             .attr({
                 x: x,
                 y: y,
@@ -27,6 +29,34 @@ Crafty.c("Pacman", {
                     y: from.y
                 });
             }
+        })
+        //when the user presses an arrow key, let's change the animation
+        .bind("KeyDown", function (e) {
+            if (e.keyCode === Crafty.keys.DOWN_ARROW) {
+                this.animateDown();
+            } else if (e.keyCode === Crafty.keys.UP_ARROW) {
+                this.animateUp();
+            } else if (e.keyCode === Crafty.keys.LEFT_ARROW) {
+                this.animateLeft();
+            } else if (e.keyCode === Crafty.keys.RIGHT_ARROW) {
+                this.animateRight();
+            }
         });
+    },
+    animateDown: function () {
+        this.reel('pacmanDown', 300, 10, 1, 2)
+            .animate('pacmanDown', -1);
+    },
+    animateUp: function () {
+        this.reel('pacmanUp', 300, 10, 3, 2)
+            .animate('pacmanUp', -1);
+    },
+    animateLeft: function () {
+        this.reel('pacmanLeft', 300, 10, 2, 2)
+            .animate('pacmanLeft', -1);
+    },
+    animateRight: function () {
+        this.reel('pacmanRight', 300, 10, 0, 2)
+            .animate('pacmanRight', -1);
     }
 });
