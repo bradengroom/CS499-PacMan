@@ -10,7 +10,11 @@ Crafty.sprite(spriteSize, "imgs/pacman-20.png", {
     pacman: [10, 0],
     ghost: [0, 0],
     pellet: [12, 2],
-    powerUp: [12, 0]
+    powerUp: [12, 0],
+    blinky: [0, 0],
+    inky: [6, 0],
+    pinky: [4, 0],
+    clyde: [2, 0]
 });
 
 //load audio files
@@ -44,13 +48,19 @@ function loadMap(file) {
                 var yCoord = y * spriteSize;
 
                 //match and create the appropriate entity
-                if (char === 'P') {
+                if (char === 'M') {
                     Crafty.e("Pacman").create(xCoord, yCoord);
-                } else if (char === 'G') {
-                    Crafty.e("Ghost").create(xCoord, yCoord);
+                } else if (char === 'B') {
+                    Crafty.e("Ghost").create(xCoord, yCoord, 'blinky');
+                } else if (char === 'I') {
+                    Crafty.e("Ghost").create(xCoord, yCoord, 'inky');
+                } else if (char === 'P') {
+                    Crafty.e("Ghost").create(xCoord, yCoord, 'pinky');
+                } else if (char === 'C') {
+                    Crafty.e("Ghost").create(xCoord, yCoord, 'clyde');
                 } else if (char === 'p') {
                     Crafty.e("Pellet").create(xCoord, yCoord);
-                } else if (char === 'B') {
+                } else if (char === 'S') {
                     Crafty.e("PowerUp").create(xCoord, yCoord);
                 } else if (char === 'W') {
                     Crafty.e("Wall").create(xCoord, yCoord);
