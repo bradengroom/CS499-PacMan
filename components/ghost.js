@@ -3,6 +3,7 @@ Crafty.c("Ghost", {
 
     create: function (x, y, name) {
 
+        //our ghosts name blinky (red), inky (blue), pink (pink), or clyde (orange)
         this.name = name;
 
         this.requires("2D, Canvas, Collision, " + this.name + ", SpriteAnimation")
@@ -12,6 +13,7 @@ Crafty.c("Ghost", {
                 z: 1
             });
 
+        //give the ghost an animation
         this.addAnimation();
     },
 

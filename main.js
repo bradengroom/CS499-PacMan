@@ -1,19 +1,15 @@
 //define a sprite size
 var spriteSize = 20;
 
-//load audio files
-Crafty.audio.add({
-    munch: ['sounds/munch.wav']
-});
-
 //define our main scene
-Crafty.scene("main", function () {
+Crafty.scene("main", function (mapFile) {
 
     //load our level map
-    loadMap("maps/level.map", initializeGame);
+    loadMap(mapFile);
 });
 
 function initializeGame(width, height) {
+    
     //initialize our game.  We give it width, height, and the html element to pput the game in
     Crafty.init(width * spriteSize, height * spriteSize, document.getElementById('game'));
 
@@ -32,31 +28,42 @@ function initializeGame(width, height) {
         pinky: [4, 0],
         clyde: [2, 0]
     });
+
+    //load audio files
+    Crafty.audio.add({
+        munch: ['sounds/munch.wav']
+    });
 }
 
-function loadMap(file, callback) {
+function loadMap(file) {
 
     //get the level map file
     $.get(file, function (levelMap) {
 
+        //split file into lines
         var lines = levelMap.split("\n")
-        
-        //call our callback with the height and width of the board.  This will call initializeGame
-        callback(lines[0].length, lines.length);
 
-        //split the file by new lines and loop over each line
+        //call initializeGame
+        initializeGame(lines[0].length, lines.length);
+
+        //loop over each line
         $.each(lines, function (y, line) {
 
             //split each line into characters and loop over each character
             $.each(line.split(""), function (x, char) {
-
 
                 //set the x and y coordinates for the current item
                 var xCoord = x * spriteSize;
                 var yCoord = y * spriteSize;
 
                 //match and create the appropriate entity
-                if (char === 'M') {
+                if (char === 'W') {
+                    Crafty.e("Wall").create(xCoord, yCoord);
+                } else if (char === 'p') {
+                    Crafty.e("Pellet").create(xCoord, yCoord);
+                } else if (char === 'S') {
+                    Crafty.e("PowerUp").create(xCoord, yCoord);
+                } else if (char === 'M') {
                     Crafty.e("Pacman").create(xCoord, yCoord);
                 } else if (char === 'B') {
                     Crafty.e("Ghost").create(xCoord, yCoord, 'blinky');
@@ -66,12 +73,6 @@ function loadMap(file, callback) {
                     Crafty.e("Ghost").create(xCoord, yCoord, 'pinky');
                 } else if (char === 'C') {
                     Crafty.e("Ghost").create(xCoord, yCoord, 'clyde');
-                } else if (char === 'p') {
-                    Crafty.e("Pellet").create(xCoord, yCoord);
-                } else if (char === 'S') {
-                    Crafty.e("PowerUp").create(xCoord, yCoord);
-                } else if (char === 'W') {
-                    Crafty.e("Wall").create(xCoord, yCoord);
                 }
             });
         });
@@ -79,4 +80,4 @@ function loadMap(file, callback) {
 }
 
 //start the main scene
-Crafty.scene("main");
+Crafty.scene("main", "maps/level.map");
