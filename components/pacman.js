@@ -32,6 +32,10 @@
                 .onHit("PowerUp", function (ent) {
                     //when pacman hits a powerup, destroy it
                     ent[0].obj.destroy();
+                    Crafty('Blinky').makeBlue();
+                    Crafty('Inky').makeBlue();
+                    Crafty('Pinky').makeBlue();
+                    Crafty('Clyde').makeBlue();
                 })
                 .bind("KeyDown", function (e) {
                     //when the user presses an arrow key, let's update the keyPressed variable

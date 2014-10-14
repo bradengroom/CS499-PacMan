@@ -64,13 +64,13 @@
                     } else if (char === 'M') {
                         Crafty.e("Pacman").create(xCoord, yCoord);
                     } else if (char === 'B') {
-                        Crafty.e("Ghost").create(xCoord, yCoord, 'blinky');
+                        Crafty.e("Blinky").create(xCoord, yCoord);
                     } else if (char === 'I') {
-                        Crafty.e("Ghost").create(xCoord, yCoord, 'inky');
+                        Crafty.e("Inky").create(xCoord, yCoord);
                     } else if (char === 'P') {
-                        Crafty.e("Ghost").create(xCoord, yCoord, 'pinky');
+                        Crafty.e("Pinky").create(xCoord, yCoord);
                     } else if (char === 'C') {
-                        Crafty.e("Ghost").create(xCoord, yCoord, 'clyde');
+                        Crafty.e("Clyde").create(xCoord, yCoord);
                     }
                 });
             });
