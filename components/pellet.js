@@ -1,12 +1,18 @@
-//this is a pellet object
-Crafty.c("Pellet", {
+/*global Crafty*/
 
-    create: function (x, y) {
+(function () {
+    "use strict";
 
-        this.requires("2D, Canvas, pellet")
-            .attr({
-                x: x,
-                y: y
-            })
-    }
-});
+    //this is a pellet object
+    Crafty.c("Pellet", {
+
+        create: function (x, y) {
+
+            this.requires("2D, Canvas, pellet")
+                .attr({
+                    x: x,
+                    y: y
+                });
+        }
+    });
+}());

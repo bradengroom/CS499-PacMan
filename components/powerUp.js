@@ -1,12 +1,18 @@
-//this is a powerup object
-Crafty.c("PowerUp", {
+/*global Crafty*/
 
-    create: function (x, y) {
+(function () {
+    "use strict";
 
-        this.requires("2D, Canvas, powerUp")
-            .attr({
-                x: x,
-                y: y
-            })
-    }
-});
+    //this is a powerup object
+    Crafty.c("PowerUp", {
+
+        create: function (x, y) {
+
+            this.requires("2D, Canvas, powerUp")
+                .attr({
+                    x: x,
+                    y: y
+                });
+        }
+    });
+}());
