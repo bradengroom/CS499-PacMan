@@ -66,12 +66,12 @@
         },
 
         makeFrightened: function () {
-            
+
             if (!this.isFrightened) {
                 this.reel('blueGhost', 400, 12, 0, 2)
                     .animate('blueGhost', -1);
             }
-            
+
             this.isFrightened = true;
             this.modeChanged = true;
             this.powerUpCount += 1;
@@ -80,7 +80,9 @@
                 this.powerUpCount -= 1;
                 if (this.powerUpCount === 0) {
                     this.isFrightened = false;
-                    this.setAnimation();
+                    if (!this.wasEaten) {
+                        this.setAnimation();
+                    }
                 }
             }, 8000);
         },
