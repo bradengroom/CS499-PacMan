@@ -8,7 +8,7 @@
 
         create: function (x, y) {
 
-            this.requires("2D, Canvas, powerUp")
+            this.requires("2D, Canvas, Collision, powerUp")
                 .attr({
                     x: x,
                     y: y

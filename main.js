@@ -1,10 +1,13 @@
 /*global $, Crafty*/
 
+var levelBitMap = [];
+
 (function () {
     "use strict";
 
     //define a sprite size
-    var spriteSize = 20;
+    var spriteSize = 20,
+        speed = 1.6;
 
     function initializeGame(width, height) {
 
@@ -47,8 +50,19 @@
             //loop over each line
             $.each(lines, function (y, line) {
 
+                var characters = line.split(""),
+                    bitmap = $.map(characters, function (char) {
+                        if (char === 'W') {
+                            return 1;
+                        } else if (char === 'G') {
+                            return 2;
+                        }
+                        return 0;
+                    });
+                levelBitMap.push(bitmap);
+
                 //split each line into characters and loop over each character
-                $.each(line.split(""), function (x, char) {
+                $.each(characters, function (x, char) {
 
                     //set the x and y coordinates for the current item
                     var xCoord = x * spriteSize,
@@ -64,13 +78,15 @@
                     } else if (char === 'M') {
                         Crafty.e("Pacman").create(xCoord, yCoord);
                     } else if (char === 'B') {
-                        Crafty.e("Blinky").create(xCoord, yCoord);
+                        Crafty.e("Ghost").create(xCoord, yCoord, speed).setAI("Blinky");
                     } else if (char === 'I') {
-                        Crafty.e("Inky").create(xCoord, yCoord);
+                        Crafty.e("Ghost").create(xCoord, yCoord, speed).setAI("Inky");
                     } else if (char === 'P') {
-                        Crafty.e("Pinky").create(xCoord, yCoord);
+                        Crafty.e("Ghost").create(xCoord, yCoord, speed).setAI("Pinky");
                     } else if (char === 'C') {
-                        Crafty.e("Clyde").create(xCoord, yCoord);
+                        Crafty.e("Ghost").create(xCoord, yCoord, speed).setAI("Clyde");
+                    } else if (char === 'G') {
+                        Crafty.e("Gate").create(xCoord, yCoord);
                     }
                 });
             });

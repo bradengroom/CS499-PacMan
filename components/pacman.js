@@ -6,6 +6,8 @@
     //this is a pacman object
     Crafty.c("Pacman", {
 
+        dotsEaten: 0,
+
         //pacmans speed
         speed: 2,
 
@@ -26,16 +28,36 @@
                 })
                 .onHit("Pellet", function (ent) {
                     //when pacman hits a pellet, destroy it and play a munching sound
-                    ent[0].obj.destroy();
-                    Crafty.audio.play('munch');
+                    if (Math.abs(ent[0].overlap) > 7) {
+                        this.dotsEaten += 1;
+                        ent[0].obj.destroy();
+                        Crafty.audio.play('munch');
+                    }
+                })
+                .onHit("Ghost", function (ent, type, overlap) {
+                    //when pacman hits a pellet, destroy it and play a munching sound
+                    if (Math.abs(ent[0].overlap) > 7) {
+                        if (ent[0].obj.isFrightened) {
+                            if (!ent[0].obj.wasEaten) {
+                                ent[0].obj.wasEaten = true;
+                                ent[0].obj.speed *= 2;
+                                ent[0].obj.reel('eyesGhost', 400, 12, 2, 2)
+                                    .animate('eyesGhost', -1);
+                            }
+
+                        } else {
+                            //some logic for losing a life will go here
+                            console.log("you lose");
+                        }
+                    }
                 })
                 .onHit("PowerUp", function (ent) {
-                    //when pacman hits a powerup, destroy it
-                    ent[0].obj.destroy();
-                    Crafty('Blinky').makeBlue();
-                    Crafty('Inky').makeBlue();
-                    Crafty('Pinky').makeBlue();
-                    Crafty('Clyde').makeBlue();
+                    if (Math.abs(ent[0].overlap) > 1) {
+                        //when pacman hits a powerup, destroy it
+                        ent[0].obj.destroy();
+                        this.dotsEaten += 1;
+                        Crafty.trigger("PowerUpEaten");
+                    }
                 })
                 .bind("KeyDown", function (e) {
                     //when the user presses an arrow key, let's update the keyPressed variable
@@ -81,6 +103,21 @@
                         this.updateAnimation();
                     }
                 });
+        },
+
+        getXCoord: function () {
+            return Math.round(this.x / 20);
+        },
+
+        getYCoord: function () {
+            return Math.round(this.y / 20);
+        },
+
+        getLocation: function () {
+            return {
+                x: this.getXCoord(),
+                y: this.getYCoord()
+            };
         },
 
         updateAnimation: function () {
