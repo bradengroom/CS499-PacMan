@@ -23,9 +23,6 @@
 
             //we also have this ghost move each frame
             this.bind("EnterFrame", this.move);
-
-            //then we call changeMode
-            this.changeMode();
         },
 
         //this function is called to place a ghost entity at an x,y coordinate
@@ -190,7 +187,10 @@
                     } else {
 
                         //else flip the in house variable to be false
-                        this.inHouse = !this.inHouse;
+                        this.inHouse = false;
+
+                        //then we call changeMode
+                        this.changeMode();
                     }
                 }
 
