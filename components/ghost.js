@@ -197,8 +197,18 @@
                 //if the ghost is in the house
                 if (this.inHouse) {
 
-                    //set the direction to the gate
-                    this.setDirectionTo(new Crafty('Gate').getLocation());
+                    //if pacman has eaten enough dots for this ghost to leave the house
+                    if (new Crafty('Pacman').dotsEaten > this.whenToLeave) {
+
+                        //set the direction to the gate
+                        this.setDirectionTo(new Crafty('Gate').getLocation());
+
+                        //if we are not ready to leave
+                    } else {
+
+                        //do nothing
+                        return;
+                    }
 
                     //if the mode has been changed
                 } else if (this.modeChanged) {
