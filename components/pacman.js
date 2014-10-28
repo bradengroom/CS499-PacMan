@@ -5,7 +5,8 @@
 
     //this is a pacman object
     Crafty.c("Pacman", {
-
+        
+        ghostCount: 0,
         dotsEaten: 0,
 
         //pacmans speed
@@ -18,7 +19,7 @@
         //pacman starts a game by going left
         keyPressed: Crafty.keys.LEFT_ARROW,
 
-        create: function (x, y) {
+        create: function (x, y) {            
 
             this.requires("2D, Canvas, pacman, Collision, SpriteAnimation")
                 .attr({
@@ -32,10 +33,11 @@
                         this.dotsEaten += 1;
                         ent[0].obj.destroy();
                         Crafty.audio.play('munch');
+                        Crafty("Score").addPoints(10);
                     }
                 })
                 .onHit("Ghost", function (ent, type, overlap) {
-                    //when pacman hits a pellet, destroy it and play a munching sound
+                    //when pacman hits a Ghost, destroy it and play a munching sound
                     if (Math.abs(ent[0].overlap) > 7) {
                         if (ent[0].obj.isFrightened) {
                             if (!ent[0].obj.wasEaten) {
@@ -43,11 +45,25 @@
                                 ent[0].obj.speed *= 2;
                                 ent[0].obj.reel('eyesGhost', 400, 12, 2, 2)
                                     .animate('eyesGhost', -1);
+                                ++this.ghostCount;
+                                Crafty("Score").addPoints(200*this.ghostCount);
                             }
 
                         } else {
                             //some logic for losing a life will go here
-                            console.log("you lose");
+                            if (Crafty("Lives").getLives() == 1) {
+                                // If there is only one life left and Pacman is killed, then gameover
+                                this.destroy();
+                                Crafty("Lives").lifeTaken(Crafty("Lives").getLives());
+                                console.log("you lose");
+                                Crafty.e("2D, DOM, Text").attr({ x: 40, y: 100, w: 300}).text("GAME OVER").textColor('#FFFFFF').textFont({ size: '100px', weight: 'bold' });  
+                            } else {
+                                // Else take life, reset pacman, and reset ghost location
+                                Crafty("Lives").lifeTaken(Crafty("Lives").getLives());
+                                this.destroy();
+                                Crafty.e('Pacman').create(180,320);
+                                Crafty.e('Ghost').resetLocation();
+                            }
                         }
                     }
                 })
@@ -57,6 +73,8 @@
                         ent[0].obj.destroy();
                         this.dotsEaten += 1;
                         Crafty.trigger("PowerUpEaten");
+                        Crafty("Score").addPoints(50);
+                        this.ghostCount = 0;
                     }
                 })
                 .bind("KeyDown", function (e) {

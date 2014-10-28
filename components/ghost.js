@@ -10,6 +10,9 @@
         UP: 3,
         DOWN: 4
     };
+    
+        var initialX = 0, 
+        initialY = 0;
 
     //this is a ghost object
     Crafty.c("Ghost", {
@@ -28,7 +31,6 @@
         //this function is called to place a ghost entity at an x,y coordinate
         //we also give the ghost a speed upon creation
         create: function (x, y, speed) {
-
             //all ghosts require 2D, canvas and collision
             this.requires("2D, Canvas, Collision")
                 .attr({ //we give ghosts these attributes
@@ -39,11 +41,22 @@
                     inHouse: true, //ghosts start out in the ghost house (blinky is an exception)
                     isChasing: true, //ghosts start in chase mode
                     powerUpCount: 0, //0 powerups have been used at the start
-                    modeChanged: false //this is used to tell a ghost when he must reverse direction
-                });
+                    modeChanged: false, //this is used to tell a ghost when he must reverse direction
+                    initialX: x, // the original x position
+                    initialY: y // the original y position
+                })
 
             //return the ghost entity
             return this;
+        },
+        
+        resetLocation: function() {
+            // Reset the location to the original location of the Ghost after PacMan has died
+            Crafty("Ghost").each(
+                function() {
+                    this.attr({x: this.initialX, y:this.initialY});
+                }
+            );
         },
 
         //this function is used to customize the ghost entity's behaviour

@@ -27,9 +27,10 @@ var levelBitMap = [];
             blinky: [0, 0],
             inky: [6, 0],
             pinky: [4, 0],
-            clyde: [2, 0]
+            clyde: [2, 0],
+            lives: [10,0]
         });
-
+        
         //load audio files
         Crafty.audio.add({
             munch: ['sounds/munch.wav']
@@ -67,10 +68,14 @@ var levelBitMap = [];
                     //set the x and y coordinates for the current item
                     var xCoord = x * spriteSize,
                         yCoord = y * spriteSize;
-
+                    
                     //match and create the appropriate entity
                     if (char === 'W') {
                         Crafty.e("Wall").create(xCoord, yCoord);
+                    } else if(char === 'Z') {
+                        Crafty.e("Score");
+                    } else if (char === 'X') {
+                        Crafty.e("Lives");
                     } else if (char === 'p') {
                         Crafty.e("Pellet").create(xCoord, yCoord);
                     } else if (char === 'S') {
@@ -102,4 +107,5 @@ var levelBitMap = [];
 
     //start the main scene
     Crafty.scene("main", "maps/level.map");
+    
 }());
