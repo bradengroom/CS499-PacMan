@@ -28,14 +28,9 @@ var levelBitMap = [];
             inky: [6, 0],
             pinky: [4, 0],
             clyde: [2, 0],
-            lives: [10, 0]
+            lives: [10,0]
         });
-
-        //load our sprites
-        Crafty.sprite(spriteSize, "imgs/cherry.gif", {
-            strawberry: [0, 0]
-        });
-
+        
         //load audio files
         Crafty.audio.add({
             munch: ['sounds/munch.wav']
@@ -73,11 +68,11 @@ var levelBitMap = [];
                     //set the x and y coordinates for the current item
                     var xCoord = x * spriteSize,
                         yCoord = y * spriteSize;
-
+                    
                     //match and create the appropriate entity
                     if (char === 'W') {
                         Crafty.e("Wall").create(xCoord, yCoord);
-                    } else if (char === 'Z') {
+                    } else if(char === 'Z') {
                         Crafty.e("Score");
                     } else if (char === 'X') {
                         Crafty.e("Lives");
@@ -101,15 +96,6 @@ var levelBitMap = [];
                 });
             });
         });
-
-        makeFruit();
-    }
-
-    function makeFruit() {
-        setTimeout(function () {
-            Crafty.e("Fruit").create(9 * spriteSize, 12 * spriteSize);
-            makeFruit();
-        }, 30000);
     }
 
     //define our main scene
@@ -121,5 +107,5 @@ var levelBitMap = [];
 
     //start the main scene
     Crafty.scene("main", "maps/level.map");
-
+    
 }());
