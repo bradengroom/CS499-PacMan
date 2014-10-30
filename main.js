@@ -1,22 +1,22 @@
 /*global $, Crafty*/
-
+ 
 var levelBitMap = [];
-
+ 
 (function () {
     "use strict";
-
+ 
     //define a sprite size
     var spriteSize = 20,
         speed = 1.6;
-
+ 
     function initializeGame(width, height) {
-
+ 
         //initialize our game.  We give it width, height, and the html element to pput the game in
         Crafty.init(width * spriteSize, height * spriteSize, document.getElementById('game'));
-
+ 
         //set the background color to black
         Crafty.background("#000000");
-
+ 
         //load our sprites
         Crafty.sprite(spriteSize, "imgs/pacman-20.png", {
             wall: [13, 3],
@@ -28,29 +28,34 @@ var levelBitMap = [];
             inky: [6, 0],
             pinky: [4, 0],
             clyde: [2, 0],
-            lives: [10,0]
+            lives: [10, 0]
         });
-        
+ 
+        //load our sprites
+        Crafty.sprite(spriteSize, "imgs/cherry.gif", {
+            cherry: [0, 0]
+        });
+ 
         //load audio files
         Crafty.audio.add({
             munch: ['sounds/munch.wav']
         });
     }
-
+ 
     function loadMap(file) {
-
+ 
         //get the level map file
         $.get(file, function (levelMap) {
-
+ 
             //split file into lines
             var lines = levelMap.split("\n");
-
+ 
             //call initializeGame
             initializeGame(lines[0].length, lines.length);
-
+ 
             //loop over each line
             $.each(lines, function (y, line) {
-
+ 
                 var characters = line.split(""),
                     bitmap = $.map(characters, function (char) {
                         if (char === 'W') {
@@ -61,18 +66,18 @@ var levelBitMap = [];
                         return 0;
                     });
                 levelBitMap.push(bitmap);
-
+ 
                 //split each line into characters and loop over each character
                 $.each(characters, function (x, char) {
-
+ 
                     //set the x and y coordinates for the current item
                     var xCoord = x * spriteSize,
                         yCoord = y * spriteSize;
-                    
+ 
                     //match and create the appropriate entity
                     if (char === 'W') {
                         Crafty.e("Wall").create(xCoord, yCoord);
-                    } else if(char === 'Z') {
+                    } else if (char === 'Z') {
                         Crafty.e("Score");
                     } else if (char === 'X') {
                         Crafty.e("Lives");
@@ -96,16 +101,25 @@ var levelBitMap = [];
                 });
             });
         });
+ 
+        makeFruit();
     }
-
+ 
+    function makeFruit() {
+        setTimeout(function () {
+            Crafty.e("Fruit").create(9 * spriteSize, 12 * spriteSize);
+            makeFruit();
+        }, 30000);
+    }
+ 
     //define our main scene
     Crafty.scene("main", function (mapFile) {
-
+ 
         //load our level map
         loadMap(mapFile);
     });
-
+ 
     //start the main scene
     Crafty.scene("main", "maps/level.map");
-    
+ 
 }());
