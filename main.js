@@ -18,22 +18,18 @@ var levelBitMap = [];
         Crafty.background("#000000");
  
         //load our sprites
-        Crafty.sprite(spriteSize, "imgs/pacman-20.png", {
+        Crafty.sprite(spriteSize, "imgs/pacman20.png", {
             wall: [13, 3],
-            pacman: [10, 0],
+            pacman: [12, 0],
             ghost: [0, 0],
-            pellet: [12, 2],
-            powerUp: [12, 0],
+            pellet: [14, 1],
+            powerUp: [15, 0],
             blinky: [0, 0],
             inky: [6, 0],
             pinky: [4, 0],
             clyde: [2, 0],
-            lives: [10, 0]
-        });
- 
-        //load our sprites
-        Crafty.sprite(spriteSize, "imgs/cherry.gif", {
-            cherry: [0, 0]
+            lives: [16, 0],
+            cherry: [16, 0]
         });
  
         //load audio files

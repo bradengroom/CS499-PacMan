@@ -101,7 +101,7 @@
             if (!this.isFrightened) {
 
                 //update the animation to be a blue frightened ghost
-                this.reel('blueGhost', 400, 12, 0, 2)
+                this.reel('blueGhost', 400, 8, 0, 2)
                     .animate('blueGhost', -1);
             }
 

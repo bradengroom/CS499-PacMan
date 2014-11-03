@@ -52,7 +52,7 @@
                             if (!ent[0].obj.wasEaten) {
                                 ent[0].obj.wasEaten = true;
                                 ent[0].obj.speed *= 2;
-                                ent[0].obj.reel('eyesGhost', 400, 12, 2, 2)
+                                ent[0].obj.reel('eyesGhost', 400, 13, 0, 2)
                                     .animate('eyesGhost', -1);
                                 ++this.ghostCount;
                                 Crafty("Score").addPoints(200 * this.ghostCount);
@@ -156,16 +156,16 @@
 
         updateAnimation: function () {
             if (this.direction === Crafty.keys.DOWN_ARROW) {
-                this.reel('pacmanDown', 300, 10, 1, 2)
+                this.reel('pacmanDown', 300, 11, 3, 2)
                     .animate('pacmanDown', -1);
             } else if (this.direction === Crafty.keys.UP_ARROW) {
-                this.reel('pacmanUp', 300, 10, 3, 2)
+                this.reel('pacmanUp', 300, 11, 2, 2)
                     .animate('pacmanUp', -1);
             } else if (this.direction === Crafty.keys.LEFT_ARROW) {
-                this.reel('pacmanLeft', 300, 10, 2, 2)
+                this.reel('pacmanLeft', 300, 11, 0, 2)
                     .animate('pacmanLeft', -1);
             } else if (this.direction === Crafty.keys.RIGHT_ARROW) {
-                this.reel('pacmanRight', 300, 10, 0, 2)
+                this.reel('pacmanRight', 300, 11, 1, 2)
                     .animate('pacmanRight', -1);
             }
         },
