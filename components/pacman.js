@@ -78,7 +78,8 @@
                                 Crafty("Lives").lifeTaken(Crafty("Lives").getLives());
                                 this.destroy();
                                 Crafty.e('Pacman').create(180, 320);
-                                Crafty.e('Ghost').resetLocation();
+                                //reset ghost and remember original variables
+                                Crafty('Ghost').resetLocation();
                             }
                         }
                     }

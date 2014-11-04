@@ -47,16 +47,13 @@ var levelBitMap = [];
             var lines = levelMap.split("\n");
  
             //call initializeGame
+            
             //for windows
             if (navigator.appVersion.indexOf('Windows') > -1) {
                  initializeGame(lines[0].length-1, lines.length);
-            }else{
+            }else{//for non windows
                  initializeGame(lines[0].length, lines.length);
             }
-            
-           
-            
-            //initializeGame(19, 22);
  
             //loop over each line
             $.each(lines, function (y, line) {

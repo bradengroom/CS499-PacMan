@@ -54,7 +54,10 @@
             // Reset the location to the original location of the Ghost after PacMan has died
             Crafty("Ghost").each(
                 function() {
-                    this.attr({x: this.initialX, y:this.initialY});
+                    this.attr({
+                        x: this.initialX, 
+                        y:this.initialY
+                    });
                 }
             );
         },
