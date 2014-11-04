@@ -1,3 +1,5 @@
+**** Run on Chrome
+
 A version of the code can be played by visting the repository's github webpage at:
   http://bradengroom.github.io/CS499-PacMan/
 
