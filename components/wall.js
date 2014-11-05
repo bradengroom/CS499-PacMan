@@ -6,9 +6,9 @@
     //this is a wall object
     Crafty.c("Wall", {
 
-        create: function (x, y) {
+        create: function (x, y, pic) {
 
-            this.requires("2D, Canvas, wall, Collision")
+            this.requires("2D, Canvas, Collision," + pic)
                 .attr({
                     x: x,
                     y: y

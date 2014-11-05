@@ -6,9 +6,9 @@
     //this is a pellet object
     Crafty.c("Gate", {
 
-        create: function (x, y) {
+        create: function (x, y, pic) {
 
-            this.requires("2D, Canvas, wall")
+            this.requires("2D, Canvas," + pic)
                 .attr({
                     x: x,
                     y: y
