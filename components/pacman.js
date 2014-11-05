@@ -132,7 +132,7 @@
                         this.direction = this.keyPressed;
 
                         //null out our keyPressed variable
-                        this.keyPressed = null;
+                        //this.keyPressed = null;
 
                         //also, update pacman's animation to match our new direction
                         this.updateAnimation();

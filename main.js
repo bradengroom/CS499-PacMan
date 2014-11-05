@@ -28,9 +28,7 @@ var levelBitMap = [];
             pinky: [4, 0],
             clyde: [2, 0],
             lives: [16, 0],
-            cherry: [16, 0],
-
-
+            cherry: [16, 0]
         });
 
         //load walls
@@ -59,6 +57,13 @@ var levelBitMap = [];
         });
     }
 
+    function makeFruit() {
+        setTimeout(function () {
+            Crafty.e("Fruit").create(9 * spriteSize, 12 * spriteSize);
+            makeFruit();
+        }, 30000);
+    }
+
     function loadMap(file) {
 
         //get the level map file
@@ -75,8 +80,7 @@ var levelBitMap = [];
 
                 var characters = line.split(""),
                     bitmap = $.map(characters, function (char) {
-                        if (['W', '1', '2', '3', '4', '6', '7', '8', '9',
-                            'v', '^', '<', '>', '|', '-'].indexOf(char) > -1) {
+                        if (['W', '1', '2', '3', '4', '6', '7', '8', '9', 'v', '^', '<', '>', '|', '-'].indexOf(char) > -1) {
                             return 1;
                         } else if (char === 'G') {
                             return 2;
@@ -150,12 +154,7 @@ var levelBitMap = [];
         makeFruit();
     }
 
-    function makeFruit() {
-        setTimeout(function () {
-            Crafty.e("Fruit").create(9 * spriteSize, 12 * spriteSize);
-            makeFruit();
-        }, 30000);
-    }
+
 
     //define our main scene
     Crafty.scene("main", function (mapFile) {
