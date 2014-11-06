@@ -142,7 +142,7 @@
         //modes are described here:
         //http://home.comcast.net/~jpittman2/pacman/pacmandossier.html#CH2_Scatter_Chase_Repeat
         //in scatter mode, ghosts reverse direction and run to their designated corner
-        //in chasse mode, ghosts head towards their target tile
+        //in chase mode, ghosts head towards their target tile
         //in frightened mode, ghosts move in random directions
         changeMode: function () {
 
