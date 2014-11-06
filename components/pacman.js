@@ -215,7 +215,7 @@
             }
 
             //if we hit a wall
-            if (this.hit('Wall')) {
+            if (this.hit('Wall') || this.hit('Gate')) {
 
                 //go back
                 this.attr({
