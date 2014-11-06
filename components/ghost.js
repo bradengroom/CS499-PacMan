@@ -5,13 +5,12 @@
 
     //this serves as an enum for our directions
     var DIRECTIONS = {
-        LEFT: 1,
-        RIGHT: 2,
-        UP: 3,
-        DOWN: 4
-    };
-    
-        var initialX = 0, 
+            LEFT: 1,
+            RIGHT: 2,
+            UP: 3,
+            DOWN: 4
+        },
+        initialX = 0,
         initialY = 0;
 
     //this is a ghost object
@@ -44,19 +43,19 @@
                     modeChanged: false, //this is used to tell a ghost when he must reverse direction
                     initialX: x, // the original x position
                     initialY: y // the original y position
-                })
+                });
 
             //return the ghost entity
             return this;
         },
-        
-        resetLocation: function() {
+
+        resetLocation: function () {
             // Reset the location to the original location of the Ghost after PacMan has died
             Crafty("Ghost").each(
-                function() {
+                function () {
                     this.attr({
-                        x: this.initialX, 
-                        y:this.initialY
+                        x: this.initialX,
+                        y: this.initialY
                     });
                 }
             );

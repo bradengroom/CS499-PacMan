@@ -30,6 +30,6 @@
                 x: this.getXCoord(),
                 y: this.getYCoord()
             };
-        },
+        }
     });
 }());
