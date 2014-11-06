@@ -45,6 +45,21 @@
             );
             life -= 1; // decrease life
         },
+        
+        addLife: function() {
+            life += 1; // increase life by 1
+            var lifeX = 265, // The x location of the picture text
+                lifeY = 1, // The y location of the picture text
+                i;
+            for (i = 1; i < life + 1; i += 1) {
+                Crafty.e("DOM, 2D, life_" + i + ", lives")
+                    .attr({
+                        x: lifeX,
+                        y: lifeY
+                    }); // The location of lives attribute
+                lifeX += 20; // Change location of the image
+            }
+        },
 
         getLives: function () {
             return life; // return the amount of lives
