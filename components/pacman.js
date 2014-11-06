@@ -54,17 +54,17 @@
                                 ent[0].obj.speed *= 2;
                                 ent[0].obj.reel('eyesGhost', 400, 13, 0, 2)
                                     .animate('eyesGhost', -1);
-                                ++this.ghostCount;
+                                this.ghostCount += 1;
                                 Crafty("Score").addPoints(200 * this.ghostCount);
                             }
 
                         } else {
                             //some logic for losing a life will go here
-                            if (Crafty("Lives").getLives() == 1) {
+                            if (Crafty("Lives").getLives() === 1) {
                                 // If there is only one life left and Pacman is killed, then gameover
                                 this.destroy();
                                 Crafty("Lives").lifeTaken(Crafty("Lives").getLives());
-                                console.log("you lose");
+                                //console.log("you lose");
                                 Crafty.e("2D, DOM, Text").attr({
                                     x: 40,
                                     y: 100,
