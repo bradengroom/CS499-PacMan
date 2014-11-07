@@ -37,19 +37,20 @@
                     }
                 })
                 .onHit("Fruit", function (ent) {
-                    //when pacman hits a pellet, destroy it and play a munching sound
+                    //when pacman hits a fruit, destroy it and play a fruit sound
                     if (Math.abs(ent[0].overlap) > 7) {
                         //this.dotsEaten += 1;
                         ent[0].obj.destroy();
-                        Crafty.audio.play('munch');
+                        Crafty.audio.play('fruit');
                         Crafty("Score").addPoints(100);
                     }
                 })
                 .onHit("Ghost", function (ent, type, overlap) {
-                    //when pacman hits a Ghost, destroy it and play a munching sound
+                    //when pacman hits a Ghost, destroy it and play a dying sound
                     if (Math.abs(ent[0].overlap) > 7) {
                         if (ent[0].obj.isFrightened) {
                             if (!ent[0].obj.wasEaten) {
+                                Crafty.audio.play('ghost');
                                 ent[0].obj.wasEaten = true;
                                 ent[0].obj.speed *= 2;
                                 ent[0].obj.reel('eyesGhost', 400, 13, 0, 2)
@@ -59,6 +60,8 @@
                             }
 
                         } else {
+                            //play death sound when hit by ghost
+                            Crafty.audio.play('death');
                             //some logic for losing a life will go here
                             if (Crafty("Lives").getLives() === 1) {
                                 // If there is only one life left and Pacman is killed, then gameover
