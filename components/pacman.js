@@ -8,6 +8,8 @@
 
         ghostCount: 0,
         dotsEaten: 0,
+        initialX: 180,
+        initialY: 320,
 
         //pacmans speed
         speed: 2,
@@ -34,12 +36,23 @@
                         ent[0].obj.destroy();
                         Crafty.audio.play('munch');
                         Crafty("Score").addPoints(10);
+                        //when all of the pellets and power ups have been eaten you win
+                        if (this.dotsEaten > 150) {
+                            Crafty.e("2D, DOM, Text").attr({
+                                x: 40,
+                                y: 100,
+                                w: 300
+                            }).text("YOU WIN").textColor('#FFFFFF').textFont({
+                                size: '100px',
+                                weight: 'bold'
+                            });
+                            Crafty.pause();
+                        }
                     }
                 })
                 .onHit("Fruit", function (ent) {
                     //when pacman hits a fruit, destroy it and play a fruit sound
                     if (Math.abs(ent[0].overlap) > 7) {
-                        //this.dotsEaten += 1;
                         ent[0].obj.destroy();
                         Crafty.audio.play('fruit');
                         Crafty("Score").addPoints(100);
@@ -67,7 +80,6 @@
                                 // If there is only one life left and Pacman is killed, then gameover
                                 this.destroy();
                                 Crafty("Lives").lifeTaken(Crafty("Lives").getLives());
-                                //console.log("you lose");
                                 Crafty.e("2D, DOM, Text").attr({
                                     x: 40,
                                     y: 100,
@@ -76,11 +88,11 @@
                                     size: '100px',
                                     weight: 'bold'
                                 });
+                                Crafty.pause();
                             } else {
                                 // Else take life, reset pacman, and reset ghost location
                                 Crafty("Lives").lifeTaken(Crafty("Lives").getLives());
-                                this.destroy();
-                                Crafty.e('Pacman').create(180, 320);
+                                Crafty('Pacman').resetLocation();
                                 //reset ghost and remember original variables
                                 Crafty('Ghost').resetLocation();
                             }
@@ -92,9 +104,21 @@
                         //when pacman hits a powerup, destroy it
                         ent[0].obj.destroy();
                         this.dotsEaten += 1;
+                        this.ghostCount = 0;
                         Crafty.trigger("PowerUpEaten");
                         Crafty("Score").addPoints(50);
-                        this.ghostCount = 0;
+                        //when all of the pellets and power ups have been eaten you win
+                        if (this.dotsEaten > 150) {
+                            Crafty.e("2D, DOM, Text").attr({
+                                x: 40,
+                                y: 100,
+                                w: 300
+                            }).text("YOU WIN").textColor('#FFFFFF').textFont({
+                                size: '100px',
+                                weight: 'bold'
+                            });
+                            Crafty.pause();
+                        }
                     }
                 })
                 .bind("KeyDown", function (e) {
@@ -141,6 +165,12 @@
                         this.updateAnimation();
                     }
                 });
+        },
+
+
+        resetLocation: function () {
+            this.x = this.initialX;
+            this.y = this.initialY;
         },
 
         getXCoord: function () {

@@ -271,22 +271,7 @@
             } else if (this.x >= Crafty.viewport.width + this.w) {
                 //put him on the left edge
                 this.x -= Crafty.viewport.width + 2 * this.w;
-            }
-            
-            
-            //if ghost goes off the top edge of the map
-            if (this.y <= -this.h) {
-
-                //put him on the bottom edge
-                this.y += Crafty.viewport.height + this.h;
-
-                //if ghost goes off the bottom edge of the map
-            } else if (this.y >= Crafty.viewport.height + this.h) {
-
-                //put him on the top edge
-                this.y -= Crafty.viewport.height + 2 * this.h;
-            }
-            
+            }            
 
             //move in the direction that was set
             this.moveInCurrentDirection();

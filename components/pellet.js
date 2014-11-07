@@ -3,7 +3,7 @@
 (function () {
     "use strict";
 
-    //this is a pellet object
+    //this is a pellet object (btw: there are 147 + 4 powerUps)
     Crafty.c("Pellet", {
 
         create: function (x, y) {
