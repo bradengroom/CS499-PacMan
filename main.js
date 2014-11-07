@@ -163,16 +163,27 @@ var levelBitMap = [];
         makeFruit();
     }
 
-
+    Crafty.defineScene("startScreen", function() {
+        Crafty.init('500', '500', document.getElementById('game'));
+        Crafty.background("blue");
+        Crafty.e("2D, DOM, Text, Mouse")
+              .attr({ w: 300, h: 500, x: 100, y: 225 })
+              .text("Start Game")
+              .css({ "text-align": "center", 'cursor': 'pointer'})
+              .textFont({ size: '50px', weight: 'bold'})
+              .textColor("#FFFFFF")
+              .bind('Click', function() {
+                console.log("over"); Crafty.enterScene("game", "maps/level+.map");
+               });
+    });
 
     //define our game scene
-    Crafty.scene("game", function (mapFile) {
-
+    Crafty.defineScene("game", function (mapFile) {
         //load our level map
         loadMap(mapFile);
     });
 
-    //start the game scene
-    Crafty.scene("game", "maps/level+.map");
+    // Start the start screen
+    Crafty.scene("startScreen");
 
 }());
