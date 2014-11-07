@@ -1,4 +1,4 @@
-Z               XXX
+Z             XXXXX
 7--------2--------9
 |pppppppp|pppppppp|
 |S<>p<->pvp<->p<>S|
@@ -6,11 +6,11 @@ Z               XXX
 |p<>p^p<-2->p^p<>p|
 |pppp|ppp|ppp|pppp|
 1--9p6-> v <-4p7--3
-   |p|   B   |p|   
-<--3pv 7-G-9 vp1-->
-   Wp  |IPC|  pW  
-<--9p^ 1---3 ^p7-->
-   |p|       |p|   
+   |p|   B   |p|
+---3pv 7-G-9 vp1--------
+    p  |IPC|  p         
+---9p^ 1---3 ^p7--------
+   |p|       |p|
 7--3pv <-2-> vp1--9
 |pppppppp|pppppppp|
 |p<9p<->pvp<->p7>p|

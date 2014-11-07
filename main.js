@@ -53,8 +53,15 @@ var levelBitMap = [];
 
         //load audio files
         Crafty.audio.add({
-            munch: ['sounds/munch.wav']
+            munch: ['sounds/munch.wav'],
+            life: ['sounds/life.wav'],
+            begin: ['sounds/begin.wav'],
+            fruit: ['sounds/fruit.wav'],
+            death: ['sounds/death.wav'],
+            ghost: ['sounds/ghost.wav']
         });
+        //play the intro tune when game starts
+        Crafty.audio.play('begin');
     }
 
     function makeFruit() {
@@ -156,14 +163,14 @@ var levelBitMap = [];
 
 
 
-    //define our main scene
-    Crafty.scene("main", function (mapFile) {
+    //define our game scene
+    Crafty.scene("game", function (mapFile) {
 
         //load our level map
         loadMap(mapFile);
     });
 
-    //start the main scene
-    Crafty.scene("main", "maps/level+.map");
+    //start the game scene
+    Crafty.scene("game", "maps/level+.map");
 
 }());
