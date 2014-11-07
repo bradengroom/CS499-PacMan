@@ -35,6 +35,10 @@
                 }
                 this.text((this.points += inc) + " Points");
             });
+        },
+        
+        getScore: function() {
+            return this.points;
         }
     });
 }());
