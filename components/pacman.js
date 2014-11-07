@@ -37,7 +37,7 @@
                         Crafty.audio.play('munch');
                         Crafty("Score").addPoints(10);
                         //when all of the pellets and power ups have been eaten you win
-                        if (this.dotsEaten > 150) {
+                        if (this.dotsEaten == 150) {
                             Crafty.e("2D, DOM, Text").attr({
                                 x: 40,
                                 y: 100,
