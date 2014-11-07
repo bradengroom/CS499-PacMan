@@ -95,6 +95,20 @@
                                 Crafty('Pacman').resetLocation();
                                 //reset ghost and remember original variables
                                 Crafty('Ghost').resetLocation();
+                                // Add a pause after death
+                                Crafty.pause();
+                                Crafty.e("Ready, 2D, DOM, Text").attr({
+                                    x: 40,
+                                    y: 242,
+                                    w: 300
+                                }).text("Ready...").textColor('#FFFF00').textFont({
+                                    size: '15px',
+                                    weight: 'bold'
+                                });
+                                setTimeout(function(){
+                                    Crafty.pause();
+                                    Crafty("Ready").destroy();
+                                }, 1000);
                             }
                         }
                     }
@@ -171,6 +185,7 @@
         resetLocation: function () {
             this.x = this.initialX;
             this.y = this.initialY;
+            this.keyPressed = Crafty.keys.LEFT_ARROW;
         },
 
         getXCoord: function () {
