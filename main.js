@@ -64,6 +64,9 @@ var levelBitMap = [];
         });
         //play the intro tune when game starts
         Crafty.audio.play('begin');
+        
+        // setTimeout(function(){Crafty.unpause();}, 1000);
+
     }
 
     function makeFruit() {
@@ -164,16 +167,16 @@ var levelBitMap = [];
     }
 
     Crafty.defineScene("startScreen", function() {
-        Crafty.init('500', '500', document.getElementById('game'));
+        Crafty.init('385', '440', document.getElementById('game'));
         Crafty.background("blue");
         Crafty.e("2D, DOM, Text, Mouse")
-              .attr({ w: 300, h: 500, x: 100, y: 225 })
+              .attr({ w: 300, h: 50, x: 40, y: 200 })
               .text("Start Game")
               .css({ "text-align": "center", 'cursor': 'pointer'})
-              .textFont({ size: '50px', weight: 'bold'})
+              .textFont({ size: '30px', weight: 'bold'})
               .textColor("#FFFFFF")
               .bind('Click', function() {
-                console.log("over"); Crafty.enterScene("game", "maps/level+.map");
+                    console.log("over"); Crafty.enterScene("game", "maps/level+.map");
                });
     });
 
