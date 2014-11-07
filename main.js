@@ -58,7 +58,9 @@ var levelBitMap = [];
             begin: ['sounds/begin.wav'],
             fruit: ['sounds/fruit.wav'],
             death: ['sounds/death.wav'],
-            ghost: ['sounds/ghost.wav']
+            ghost: ['sounds/ghost.wav'],
+            extralife: ['sounds/extralife.wav'],
+            siren: ['sounds/siren.wav']
         });
         //play the intro tune when game starts
         Crafty.audio.play('begin');
