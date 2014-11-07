@@ -213,7 +213,7 @@
                 if (this.inHouse) {
 
                     //if pacman has eaten enough dots for this ghost to leave the house
-                    if (new Crafty('Pacman').dotsEaten > this.whenToLeave) {
+                    if (Crafty('Pacman').dotsEaten > this.whenToLeave) {
 
                         //set the direction to the gate
                         this.setDirectionTo(new Crafty('Gate').getLocation());
@@ -260,6 +260,17 @@
                     //when in scatter mode the ghost should go to its corner
                     this.setDirectionTo(this.corner);
                 }
+            }
+
+            //if ghost goes off the left edge of the map
+            if (this.x <= -this.w) {
+                //put him on the right edge
+                this.x += Crafty.viewport.width + this.w;
+
+                //if ghost goes off the right edge of the map
+            } else if (this.x >= Crafty.viewport.width + this.w) {
+                //put him on the left edge
+                this.x -= Crafty.viewport.width + 2 * this.w;
             }
 
             //move in the direction that was set
