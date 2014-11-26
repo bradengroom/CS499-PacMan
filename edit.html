@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body style="background-color: black;">
+    <div style="background-color: black; height: 15px; border-bottom: 1px solid lightblue; margin: 0 0 30px 0; padding: 15px; color: white; font: 12px Arial">
+        Pacman // Last updated: Friday, November 7, 2014
+    </div>
+
+    <!--
+    <div style="float:left; color: white; padding: 20px;">
+        High Scores:
+    </div>
+-->
+
+    <!-- This is where our game shows up -->
+    <center>
+        <div class="container">
+            <div class="col-sm-6">
+                <div id="game"></div>
+                <button type="button" onclick="Crafty.scene('startScreen')" style="background-color: white; border-color: black; cursor: pointer;">New Game</button>
+                <button type="button" onclick="Crafty.pause()" style="background-color: white; border-color: black; cursor: pointer;">Pause</button>
+            </div>
+
+            <div class="col-sm-6">
+                <center>
+                    <canvas style="background-color: black; border: 1px solid white;" class="rainbow-pixel-canvas"></canvas>
+                </center>
+
+                <center>
+                    <img class="sprite" src="imgs/items/pacman.png" id="M">
+                    <img class="sprite" src="imgs/items/wall.png" id="W">
+                    <img class="sprite" src="imgs/items/red.png" id="C">
+                    <img class="sprite" src="imgs/items/blue.png" id="B">
+                    <img class="sprite" src="imgs/items/green.png" id="P">
+                    <img class="sprite" src="imgs/items/purple.png" id="I">
+                    <img style="background-color: black;" class="sprite" src="imgs/items/background.png" id=" ">
+                    <img style="background-color: black;" class="sprite" src="imgs/items/pellet.png" id="p">
+                    <img style="background-color: black;" class="sprite" src="imgs/items/powerup.png" id="S">
+                    <img style="background-color: black;" class="sprite" src="imgs/items/gate.png" id="G">
+                    <br><br>
+                    <div class="btn btn-success" onclick="loadCustomMap();">Load Map</div>
+                </center>
+            </div>
+        </div>
+    </center>
+
+    <!-- Import libraries -->
+    <script src="libs/jquery.js"></script>
+    <script src="libs/crafty-min.js"></script>
+    <script src="libs/interact-1.1.2.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- import components -->
+    <script src="components/ghost.js"></script>
+    <script src="components/pacman.js"></script>
+    <script src="components/wall.js"></script>
+    <script src="components/pellet.js"></script>
+    <script src="components/fruit.js"></script>
+    <script src="components/powerUp.js"></script>
+    <script src="components/gate.js"></script>
+    <script src="components/score.js"></script>
+    <script src="components/lives.js"></script>
+    <script src="components/ghost-ai/blinky.js"></script>
+    <script src="components/ghost-ai/inky.js"></script>
+    <script src="components/ghost-ai/pinky.js"></script>
+    <script src="components/ghost-ai/clyde.js"></script>
+
+    <!-- import game -->
+    
+    <script src="js/edit.js"></script>
+</body>
+
+</html>
