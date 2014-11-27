@@ -46,6 +46,12 @@
                                 size: '100px',
                                 weight: 'bold'
                             });
+
+                            var name = prompt("Please enter your name", "Player");
+                            if (name != null) {
+                                postScore(name, Crafty("Score").getScore());
+                            }
+
                             Crafty.pause();
                         }
                     }
@@ -93,7 +99,7 @@
                                 if (name != null) {
                                     postScore(name, Crafty("Score").getScore());
                                 }
-                                
+
                                 Crafty.pause();
                             } else {
                                 // Else take life, reset pacman, and reset ghost location
@@ -111,7 +117,7 @@
                                     size: '15px',
                                     weight: 'bold'
                                 });
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     Crafty.pause();
                                     Crafty("Ready").destroy();
                                 }, 1000);
@@ -137,6 +143,12 @@
                                 size: '100px',
                                 weight: 'bold'
                             });
+
+                            var name = prompt("Please enter your name", "Player");
+                            if (name != null) {
+                                postScore(name, Crafty("Score").getScore());
+                            }
+
                             Crafty.pause();
                         }
                     }
