@@ -77,7 +77,7 @@ var levelBitMap = [];
     }
 
     function loadMap(levelMap) {
-console.log("called");
+        console.log("called");
         //split file into lines
         var lines = levelMap.split("\n");
 
@@ -201,3 +201,36 @@ console.log("called");
     Crafty.scene("startScreen");
 
 }());
+
+function postScore(name, score) {
+    $.get(
+        "http://104.236.6.144/new_score/" + name + "/" + score,
+        function (highScores) {
+            updateHighScores(highScores.scores)
+        }
+    );
+}
+
+function getScores() {
+    $.get(
+        "http://104.236.6.144/highscores/" + 20,
+        function (highScores) {
+            updateHighScores(highScores.scores)
+        }
+    );
+}
+
+function updateHighScores(highScores) {
+
+    var html = "";
+
+    for (var i = 0; i < highScores.length; i++) {
+        html += "<li>" +
+            highScores[i].name + " : " + highScores[i].score +
+            "</li>";
+    }
+    $( "#scoreContainer" ).html(html);
+    console.log(highScores);
+}
+
+getScores();

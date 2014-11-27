@@ -88,6 +88,12 @@
                                     size: '100px',
                                     weight: 'bold'
                                 });
+
+                                var name = prompt("Please enter your name", "Player");
+                                if (name != null) {
+                                    postScore(name, Crafty("Score").getScore());
+                                }
+                                
                                 Crafty.pause();
                             } else {
                                 // Else take life, reset pacman, and reset ghost location
