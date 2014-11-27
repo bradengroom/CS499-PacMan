@@ -5,15 +5,30 @@
 </head>
 
 <body style="background-color: black;">
-    <div style="background-color: black; height: 15px; border-bottom: 1px solid lightblue; margin: 0 0 30px 0; padding: 15px; color: white; font: 12px Arial">
-        Pacman // Last updated: Friday, November 7, 2014
+
+    <div class="navbar navbar-static-top navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Pacman</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/index.html">Play</a>
+                    </li>
+                    <li class="active"><a href="#">Edit</a>
+                    </li>
+                    <li><a href="/scores.html">Scores</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a>Last updated: Wednesday, November 26, 2014</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <!--
-    <div style="float:left; color: white; padding: 20px;">
-        High Scores:
-    </div>
--->
 
     <!-- This is where our game shows up -->
     <center>
@@ -36,11 +51,12 @@
                     <img class="sprite" src="imgs/items/blue.png" id="B">
                     <img class="sprite" src="imgs/items/green.png" id="P">
                     <img class="sprite" src="imgs/items/purple.png" id="I">
-                    <img style="background-color: black;" class="sprite" src="imgs/items/background.png" id=" ">
+                    <img style="background-color: black; border: 1px solid white" class="sprite" src="imgs/items/background.png" id=" ">
                     <img style="background-color: black;" class="sprite" src="imgs/items/pellet.png" id="p">
                     <img style="background-color: black;" class="sprite" src="imgs/items/powerup.png" id="S">
                     <img style="background-color: black;" class="sprite" src="imgs/items/gate.png" id="G">
-                    <br><br>
+                    <br>
+                    <br>
                     <div class="btn btn-success" onclick="loadCustomMap();">Load Map</div>
                 </center>
             </div>
@@ -52,7 +68,7 @@
     <script src="libs/crafty-min.js"></script>
     <script src="libs/interact-1.1.2.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- import components -->
     <script src="components/ghost.js"></script>
     <script src="components/pacman.js"></script>
@@ -69,7 +85,7 @@
     <script src="components/ghost-ai/clyde.js"></script>
 
     <!-- import game -->
-    
+
     <script src="js/edit.js"></script>
 </body>
 
