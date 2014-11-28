@@ -164,15 +164,15 @@ var levelBitMap = [];
 
     Crafty.defineScene("startScreen", function () {
         Crafty.init('385', '440', document.getElementById('game'));
-        Crafty.background("blue");
+        Crafty.background('#000000 url(imgs/startscreen.png) no-repeat center center');
         Crafty.e("2D, DOM, Text, Mouse")
             .attr({
                 w: 300,
                 h: 50,
                 x: 40,
-                y: 200
+                y: 325
             })
-            .text("Start Game")
+            .text("START GAME")
             .css({
                 "text-align": "center",
                 'cursor': 'pointer'
