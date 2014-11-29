@@ -205,7 +205,6 @@ var levelBitMap = [];
     //define our new level scene
     Crafty.defineScene("level", function (levelObject) {
         //get the level map file
-        Crafty("DOM").destroy();
         $.get(levelObject.mapFile, function (levelMap) {
             //load our level map
             loadMap(levelMap, levelObject.currentScore, levelObject.currentLives, levelObject.level);

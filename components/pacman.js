@@ -53,6 +53,7 @@
                                 currentLives: Crafty("Lives").getLives(),
                                 level: Crafty("Levels").getLevels()+1
                             };
+                            
                             Crafty.enterScene("level", levelObject);
 
                             Crafty.pause();
