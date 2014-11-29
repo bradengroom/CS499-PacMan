@@ -42,15 +42,18 @@
                                 x: 40,
                                 y: 100,
                                 w: 300
-                            }).text("YOU WIN").textColor('#FFFFFF').textFont({
+                            }).text("Next Level").textColor('#FFFFFF').textFont({
                                 size: '100px',
                                 weight: 'bold'
                             });
-
-                            var name = prompt("Please enter your name", "Player");
-                            if (name != null) {
-                                postScore(name, Crafty("Score").getScore());
-                            }
+                            
+                            var levelObject = {
+                                mapFile: "maps/level+.map",
+                                currentScore: Crafty("Score").getScore(), //currentScore: 1250,
+                                currentLives: Crafty("Lives").getLives(),
+                                level: Crafty("Levels").getLevels()+1
+                            };
+                            Crafty.enterScene("level", levelObject);
 
                             Crafty.pause();
                         }
@@ -134,20 +137,23 @@
                         Crafty.trigger("PowerUpEaten");
                         Crafty("Score").addPoints(50);
                         //when all of the pellets and power ups have been eaten you win
-                        if (this.dotsEaten > 150) {
+                        if (this.dotsEaten == 150) {
                             Crafty.e("2D, DOM, Text").attr({
                                 x: 40,
                                 y: 100,
                                 w: 300
-                            }).text("YOU WIN").textColor('#FFFFFF').textFont({
+                            }).text("New Level").textColor('#FFFFFF').textFont({
                                 size: '100px',
                                 weight: 'bold'
                             });
-
-                            var name = prompt("Please enter your name", "Player");
-                            if (name != null) {
-                                postScore(name, Crafty("Score").getScore());
-                            }
+                                                                                    
+                            var levelObject = {
+                                mapFile: "maps/level+.map",
+                                currentScore: Crafty("Score").getScore(), //currentScore: 1250,
+                                currentLives: Crafty("Lives").getLives(),
+                                level: Crafty("Levels").getLevels()+1
+                            };
+                            Crafty.enterScene("level", levelObject);
 
                             Crafty.pause();
                         }

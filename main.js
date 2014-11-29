@@ -76,7 +76,7 @@ var levelBitMap = [];
         }, 30000);
     }
 
-    function loadMap(levelMap) {
+    function loadMap(levelMap, currentScore, currentLives, level) {
         console.log("called");
         //split file into lines
         var lines = levelMap.split("\n");
@@ -110,8 +110,13 @@ var levelBitMap = [];
                     Crafty.e("Wall").create(xCoord, yCoord, "wall");
                 } else if (char === 'Z') {
                     Crafty.e("Score");
+                    Crafty("Score").setPoints(currentScore);
                 } else if (char === 'X') {
                     Crafty.e("Lives");
+                    Crafty("Lives").setLives(currentLives);
+                } else if (char === 'V') {
+                    Crafty.e("Levels");
+                    Crafty("Levels").setLevel(level);
                 } else if (char === 'p') {
                     Crafty.e("Pellet").create(xCoord, yCoord);
                 } else if (char === 'S') {
@@ -193,7 +198,17 @@ var levelBitMap = [];
         //get the level map file
         $.get(mapFile, function (levelMap) {
             //load our level map
-            loadMap(levelMap);
+            loadMap(levelMap, 0, 3, 1);
+        });
+    });
+    
+    //define our new level scene
+    Crafty.defineScene("level", function (levelObject) {
+        //get the level map file
+        Crafty("DOM").destroy();
+        $.get(levelObject.mapFile, function (levelMap) {
+            //load our level map
+            loadMap(levelMap, levelObject.currentScore, levelObject.currentLives, levelObject.level);
         });
     });
 

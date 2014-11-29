@@ -34,6 +34,8 @@
                     }); // The location of lives attribute
                 lifeX += 20; // Change location of the image
             }
+            
+            life = 3;
         },
 
         lifeTaken: function (lifeAmt) {
@@ -44,6 +46,23 @@
                 }
             );
             life -= 1; // decrease life
+        },
+        
+        setLives: function(lifeAmt) {
+            if (life != 5) { // Max of 5 lives
+                life = lifeAmt; // increase life by 1
+                var lifeX = 265, // The x location of the picture text
+                    lifeY = 1, // The y location of the picture text
+                    i;
+                for (i = 1; i < life + 1; i += 1) {
+                    Crafty.e("DOM, 2D, life_" + i + ", lives")
+                        .attr({
+                            x: lifeX,
+                            y: lifeY
+                        }); // The location of lives attribute
+                    lifeX += 20; // Change location of the image
+                }
+            }
         },
         
         addLife: function() {

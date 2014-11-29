@@ -23,6 +23,10 @@
                     weight: 'bold'
                 });
         },
+        
+        setPoints: function(amt) {
+            this.text((this.points += amt) + " Points");
+        },
 
         addPoints: function (inc) {
             // Add points of the score
