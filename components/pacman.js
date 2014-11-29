@@ -54,9 +54,8 @@
                                 level: Crafty("Levels").getLevels()+1
                             };
                             
+                            console.log("starting next level scene");
                             Crafty.enterScene("level", levelObject);
-
-                            Crafty.pause();
                         }
                     }
                 })
