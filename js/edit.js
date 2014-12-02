@@ -4,6 +4,9 @@ var levelBitMap = [];
 var spriteSize = 20,
     speed = 1.6;
 
+var fileUploaded = false;
+var map = "";
+
 function initializeGame(width, height) {
 
     //initialize our game.  We give it width, height, and the html element to pput the game in
@@ -62,13 +65,6 @@ function initializeGame(width, height) {
 
     // setTimeout(function(){Crafty.unpause();}, 1000);
 
-}
-
-function makeFruit() {
-    setTimeout(function () {
-        Crafty.e("Fruit").create(9 * spriteSize, 12 * spriteSize);
-        makeFruit();
-    }, 30000);
 }
 
 function loadMap(levelMap) {
@@ -154,7 +150,6 @@ function loadMap(levelMap) {
             }
         });
     });
-    makeFruit();
 }
 
 Crafty.defineScene("startScreen", function () {
@@ -193,20 +188,26 @@ Crafty.defineScene("game", function () {
 var pixelSize = 20;
 var img = document.getElementById("W");
 
-var mapData = new Array(21);
+var mapData = new Array(19);
 
 function clearMap() {
-    for (var i = 0; i < 21; i++) {
-        mapData[i] = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+    for (var i = 0; i < 19; i++) {
+        mapData[i] = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
     }
 }
 
 function getMap() {
-    var mapString = "Z             XXXXX\n";
-    for (var i = 0; i < 21; i++) {
-        mapString += mapData[i].join("") + "\n";
+    if (fileUploaded) {
+        fileUploaded = false;
+        return map;
+    } else {
+        var mapString = "Z             XXXXX\nWWWWWWWWWWWWWWWWWWW\n";
+        for (var i = 0; i < 19; i++) {
+            mapString += "W" + mapData[i].join("") + "W\n";
+        }
+        mapString += "WWWWWWWWWWWWWWWWWWW\n";
+        return mapString;
     }
-    return mapString;
 }
 
 clearMap();
@@ -233,15 +234,17 @@ interact('.rainbow-pixel-canvas')
     .on('dragmove', function (event) {
         var context = event.target.getContext('2d');
 
-        context.clearRect(event.pageX - pixelSize, event.pageY - pixelSize, pixelSize, pixelSize);
-        context.drawImage(img, event.pageX - pixelSize, event.pageY - pixelSize);
-        mapData[(event.pageY - pixelSize) / pixelSize][(event.pageX - pixelSize) / pixelSize] = img.id;
+        if (event.pageX >= 0 && event.pageX <= 340 && event.pageY >= 0 && event.pageY <= 380) {
+            context.clearRect(event.pageX - pixelSize, event.pageY - pixelSize, pixelSize, pixelSize);
+            context.drawImage(img, event.pageX - pixelSize, event.pageY - pixelSize);
+            mapData[(event.pageY - pixelSize) / pixelSize][(event.pageX - pixelSize) / pixelSize] = img.id;
+        }
     })
 
 function resizeCanvases() {
     [].forEach.call(document.querySelectorAll('.rainbow-pixel-canvas'), function (canvas) {
-        canvas.width = 380;
-        canvas.height = 420;
+        canvas.width = 340;
+        canvas.height = 380;
     });
 }
 
@@ -254,3 +257,49 @@ function loadCustomMap() {
     // Start the start screen
     Crafty.scene("startScreen");
 }
+
+function download() {
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(getMap()));
+    pom.setAttribute('download', "myLevel.map");
+    pom.click();
+}
+
+function upload() {
+    document.getElementById("file1").click();
+}
+
+function loadFile() {
+    var input, file, fr;
+
+    if (typeof window.FileReader !== 'function') {
+        alert("The file API isn't supported on this browser yet.");
+        return;
+    }
+
+    input = document.getElementById('file1');
+    if (!input) {
+        alert("Couldn't find the fileinput element.");
+    } else if (!input.files) {
+        alert("This browser doesn't seem to support the `files` property of file inputs.");
+    } else {
+        file = input.files[0];
+        fr = new FileReader();
+        fr.onload = receivedText;
+        fr.readAsText(file);
+    }
+
+    function receivedText() {
+        console.log(fr.result);
+        //loadCustomMap();
+        map = fr.result;
+        loadCustomMap();
+        //return fr.result;
+    }
+}
+
+$('#file1').change(function () {
+    var filename = $('#file1').val();
+    fileUploaded = true;
+    loadFile();
+});

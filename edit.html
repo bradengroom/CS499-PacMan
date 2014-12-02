@@ -35,8 +35,8 @@
         <div class="container">
             <div class="col-sm-6">
                 <div id="game"></div>
-                <button type="button" onclick="Crafty.scene('startScreen')" style="background-color: white; border-color: black; cursor: pointer;">New Game</button>
-                <button type="button" onclick="Crafty.pause()" style="background-color: white; border-color: black; cursor: pointer;">Pause</button>
+                <button type="button" class="btn btn-success" onclick="Crafty.scene('startScreen')">New Game</button>
+                <button type="button" class="btn btn-success" onclick="Crafty.pause()">Pause</button>
             </div>
 
             <div class="col-sm-6">
@@ -58,6 +58,9 @@
                     <br>
                     <br>
                     <div class="btn btn-success" onclick="loadCustomMap();">Load Map</div>
+                    <div class="btn btn-success" onclick="download();">Download</div>
+                    <div class="btn btn-success" onclick="upload();">Upload</div>
+                    <input type="file" id="file1" style="display:none">
                 </center>
             </div>
         </div>
