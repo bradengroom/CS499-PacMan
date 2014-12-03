@@ -28,7 +28,11 @@ var levelBitMap = [];
             pinky: [4, 0],
             clyde: [2, 0],
             lives: [16, 0],
-            cherry: [16, 0]
+            cherry: [16, 0],
+            strawberry: [16, 1],
+            orange: [16, 2],
+            banana: [16,3]
+            
         });
 
         //load walls
@@ -73,7 +77,7 @@ var levelBitMap = [];
         setTimeout(function () {
             Crafty.e("Fruit").create(9 * spriteSize, 12 * spriteSize);
             makeFruit();
-        }, 30000);
+        }, 20000);
     }
 
     function loadMap(levelMap, currentScore, currentLives, level) {
