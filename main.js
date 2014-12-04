@@ -65,7 +65,7 @@ var levelBitMap = [];
             ghost: ['sounds/ghost.wav'],
             extralife: ['sounds/extralife.wav'],
             siren: ['sounds/siren.wav'],
-            laser: ['sounds/laser.mp3']
+            laser: ['sounds/shortLaser.mp3']
         });
         //play the intro tune when game starts
         Crafty.audio.play('begin');
