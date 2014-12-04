@@ -10,6 +10,7 @@
         dotsEaten: 0,
         initialX: 180,
         initialY: 320,
+        shoot: false,
 
         //pacmans speed
         speed: 2,
@@ -30,7 +31,11 @@
                     y: y
                 })
                 .onHit("Pellet", function (ent) {
-                    //when pacman hits a pellet, destroy it and play a munching sound
+                    //increase the speed of the ghost by 5% per level, 
+                    //a pellet hit is the first thing done by Pacman each level
+                    Crafty("Ghost").speedUp();
+
+                    //when pacman hits a pellet, destroy it and play a munching sound                
                     if (Math.abs(ent[0].overlap) > 7) {
                         this.dotsEaten += 1;
                         ent[0].obj.destroy();
@@ -46,14 +51,14 @@
                                 size: '100px',
                                 weight: 'bold'
                             });
-                            
+
                             var levelObject = {
                                 mapFile: "maps/level+.map",
                                 currentScore: Crafty("Score").getScore(), //currentScore: 1250,
                                 currentLives: Crafty("Lives").getLives(),
-                                level: Crafty("Levels").getLevels()+1
+                                level: Crafty("Levels").getLevels() + 1
                             };
-                            
+
                             console.log("starting next level scene");
                             Crafty.enterScene("level", levelObject);
                         }
@@ -74,7 +79,7 @@
                             if (!ent[0].obj.wasEaten) {
                                 Crafty.audio.play('ghost');
                                 ent[0].obj.wasEaten = true;
-                                ent[0].obj.speed *= 2;
+                                ent[0].obj.speed *= 4;
                                 ent[0].obj.reel('eyesGhost', 400, 13, 0, 2)
                                     .animate('eyesGhost', -1);
                                 this.ghostCount += 1;
@@ -146,12 +151,12 @@
                                 size: '100px',
                                 weight: 'bold'
                             });
-                                                                                    
+
                             var levelObject = {
                                 mapFile: "maps/level+.map",
                                 currentScore: Crafty("Score").getScore(), //currentScore: 1250,
                                 currentLives: Crafty("Lives").getLives(),
-                                level: Crafty("Levels").getLevels()+1
+                                level: Crafty("Levels").getLevels() + 1
                             };
                             Crafty.enterScene("level", levelObject);
 
@@ -166,12 +171,56 @@
                     if (e.keyCode !== this.direction) {
 
                         //we only need to update the variable if the key is an arrow key
-                        if (e.keyCode === Crafty.keys.LEFT_ARROW || e.keyCode === Crafty.keys.RIGHT_ARROW || e.keyCode === Crafty.keys.UP_ARROW || e.keyCode === Crafty.keys.DOWN_ARROW) {
+                        if (e.keyCode === Crafty.keys.LEFT_ARROW ||
+                            e.keyCode === Crafty.keys.RIGHT_ARROW ||
+                            e.keyCode === Crafty.keys.UP_ARROW ||
+                            e.keyCode === Crafty.keys.DOWN_ARROW) {
 
                             //update the variable
                             this.keyPressed = e.keyCode;
                         }
+                        if ((e.keyCode) === Crafty.keys.SPACE) {
+                            
+                            var dir;
+                            
+                            if (!this.shoot) {
+                                this.shoot = true;
+                                //this.delay(fire(), 100, 0);
+
+                                Crafty.audio.play('munch');
+
+                                switch (this.direction) {
+                                    case Crafty.keys.LEFT_ARROW:
+                                        this.dir = "w";
+                                        break;
+                                    case Crafty.keys.RIGHT_ARROW:
+                                        this.dir = "e";
+                                        break;
+                                    case Crafty.keys.UP_ARROW:
+                                        this.dir = "n";
+                                        break;
+                                    case Crafty.keys.DOWN_ARROW:
+                                        this.dir = "s";
+                                        break;
+                                }
+
+                                Crafty.e("2D, DOM, Color, bullet").attr({
+                                    x: this.getXCoord(),
+                                    y: this.getYCoord(),
+                                    w: 5,
+                                    h: 2,
+                                    z: 50
+                                }).color("red")
+                                .bullet(this.dir);
+                                var old = this.pos();
+                                this.trigger("change", old);
+
+                                this.shoot = true;
+                            }
+
+                        }
                     }
+
                 })
                 .bind("EnterFrame", function () {
                     //make pacman move each frame
@@ -226,6 +275,25 @@
                 y: this.getYCoord()
             };
         },
+
+        getDirection: function () {
+            return this.direction;
+        },
+
+        incrGhostCount: function () {
+            this.ghostCount += 1;
+        },
+
+        getGhostCount: function () {
+            return this.ghostCount;
+        },
+
+        fire: function () {
+            this.shoot = false;
+        },
+
+
+
 
         updateAnimation: function () {
             if (this.direction === Crafty.keys.DOWN_ARROW) {
