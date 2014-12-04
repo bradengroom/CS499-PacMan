@@ -115,9 +115,6 @@
 
             //increment powerup counter
             this.powerUpCount += 1;
-            
-            //slow the ghost down
-            this.speed = this.speed/2;
 
             //after 8 seconds
             this.timeout(function () {
@@ -137,9 +134,6 @@
                         //we set our animation back to normal
                         this.setAnimation();
                     }
-                    
-                    //return to normal speed
-                    this.speed = this.speed*2;
                 }
             }, 8000);
         },
@@ -199,13 +193,12 @@
                         //it must change directions to exit the house
                         this.modeChanged = true;
 
-                        //divide its speed by four
-                        //(the speed gets mulitplied by 4 when it is eaten)
-                        this.speed /= 4;
+                        //divide its speed by two
+                        //(the speed gets mulitplied by 2 when it is eaten)
+                        this.speed /= 2;
 
                         //set the animation back to normal
                         this.setAnimation();
-                        
                     } else {
 
                         //else flip the in house variable to be false
@@ -225,14 +218,14 @@
                         //set the direction to the gate
                         this.setDirectionTo(new Crafty('Gate').getLocation());
 
-                    //if we are not ready to leave
+                        //if we are not ready to leave
                     } else {
 
                         //do nothing
                         return;
                     }
 
-                //if the mode has been changed
+                    //if the mode has been changed
                 } else if (this.modeChanged) {
 
                     //the ghost must reverse direction by returning to its previous location
@@ -241,13 +234,13 @@
                     //set mode changed back to false
                     this.modeChanged = false;
 
-                //if the ghost was eaten
+                    //if the ghost was eaten
                 } else if (this.wasEaten) {
 
                     //set its direction to the gate
                     this.setDirectionTo(new Crafty('Gate').getLocation());
 
-                //if the ghost is frightened
+                    //if the ghost is frightened
                 } else if (this.isFrightened) {
 
                     //get the list of possible moves
@@ -256,7 +249,7 @@
                     //choose a random one
                     this.setDirectionTo(availableMoves[Math.floor(Math.random() * availableMoves.length)]);
 
-                //if the ghost is chasing pacman
+                    //if the ghost is chasing pacman
                 } else if (this.isChasing) {
 
                     //set the direction to pacman
@@ -278,7 +271,7 @@
             } else if (this.x >= Crafty.viewport.width + this.w) {
                 //put him on the left edge
                 this.x -= Crafty.viewport.width + 2 * this.w;
-            }
+            }            
 
             //move in the direction that was set
             this.moveInCurrentDirection();
@@ -409,13 +402,6 @@
             //return the closest one found
             return tile;
         },
-        
-        //changes the speed of the ghost by 5% per level
-        speedUp: function () {
-            this.speed = this.speed * (1 + Crafty('Levels').getLevels() * 0.05);
-            console.log("level: " + Crafty('Levels').getLevels() + ", Speed of ghost: " + this.speed);
-        },
-        
 
         //this function will move the ghost in its current set direction
         //i feel like this function can be rewritten to be much more concise

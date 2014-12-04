@@ -31,9 +31,6 @@
                     y: y
                 })
                 .onHit("Pellet", function (ent) {
-                    //increase the speed of the ghost by 5% per level, 
-                    //a pellet hit is the first thing done by Pacman each level
-                    Crafty("Ghost").speedUp();
 
                     //when pacman hits a pellet, destroy it and play a munching sound                
                     if (Math.abs(ent[0].overlap) > 7) {
@@ -54,7 +51,8 @@
 
                             var levelObject = {
                                 mapFile: "maps/level+.map",
-                                currentScore: Crafty("Score").getScore(), //currentScore: 1250,
+                                currentScore: Crafty("Score").getScore(),
+                                //currentScore: 1250,
                                 currentLives: Crafty("Lives").getLives(),
                                 level: Crafty("Levels").getLevels() + 1
                             };
@@ -79,7 +77,7 @@
                             if (!ent[0].obj.wasEaten) {
                                 Crafty.audio.play('ghost');
                                 ent[0].obj.wasEaten = true;
-                                ent[0].obj.speed *= 4;
+                                ent[0].obj.speed *= 2;
                                 ent[0].obj.reel('eyesGhost', 400, 13, 0, 2)
                                     .animate('eyesGhost', -1);
                                 this.ghostCount += 1;
@@ -91,7 +89,8 @@
                             Crafty.audio.play('death');
                             //some logic for losing a life will go here
                             if (Crafty("Lives").getLives() === 1) {
-                                // If there is only one life left and Pacman is killed, then gameover
+                                // If there is only one life left and Pacman is killed, 
+                                //then gameover
                                 this.destroy();
                                 Crafty("Lives").lifeTaken(Crafty("Lives").getLives());
                                 Crafty.e("2D, DOM, Text").attr({
@@ -154,7 +153,8 @@
 
                             var levelObject = {
                                 mapFile: "maps/level+.map",
-                                currentScore: Crafty("Score").getScore(), //currentScore: 1250,
+                                currentScore: Crafty("Score").getScore(),
+                                //currentScore: 1250,
                                 currentLives: Crafty("Lives").getLives(),
                                 level: Crafty("Levels").getLevels() + 1
                             };
@@ -165,9 +165,11 @@
                     }
                 })
                 .bind("KeyDown", function (e) {
-                    //when the user presses an arrow key, let's update the keyPressed variable
+                    //when the user presses an arrow key, 
+                    //let's update the keyPressed variable
 
-                    //we only need to update the variable if the key is different from our current direction
+                    //we only need to update the variable if the 
+                    //key is different from our current direction
                     if (e.keyCode !== this.direction) {
 
                         //we only need to update the variable if the key is an arrow key
@@ -179,56 +181,48 @@
                             //update the variable
                             this.keyPressed = e.keyCode;
                         }
-                        
+
                         //this is where lasers come from.. the spacebar
                         if ((e.keyCode) === Crafty.keys.SPACE) {
-                            
                             var dir;
-                            
-                            if (!this.shoot) {
-                                this.shoot = true;
-                                Crafty.audio.play('munch');
+                            Crafty.audio.play('munch');
 
-                                switch (this.direction) {
-                                    case Crafty.keys.LEFT_ARROW:
-                                        Crafty.e("2D, DOM, Color, bullet").attr({
-                                            x: this.x + 10,
-                                            y: this.y + 10,
-                                            w: 5,
-                                            h: 5
-                                        }).color("red").move("w", 15);
-                                        break;
-                                    case Crafty.keys.RIGHT_ARROW:
-                                        Crafty.e("2D, DOM, Color, bullet").attr({
-                                            x: this.x + 10,
-                                            y: this.y + 10,
-                                            w: 5,
-                                            h: 5
-                                        }).color("red").move("e", 15);
-                                        break;
-                                    case Crafty.keys.UP_ARROW:
-                                        Crafty.e("2D, DOM, Color, bullet").attr({
-                                            x: this.x + 10,
-                                            y: this.y + 10,
-                                            w: 5,
-                                            h: 5
-                                        }).color("red").move("n", 15);
-                                        break;
-                                    case Crafty.keys.DOWN_ARROW:
-                                        Crafty.e("2D, DOM, Color, bullet").attr({
-                                            x: this.x + 10,
-                                            y: this.y + 10,
-                                            w: 5,
-                                            h: 5
-                                        }).color("red").move("n", 15);
-                                        break;
-                                }
-                                var old = this.pos();
-                                this.trigger("change", old);
-
-                                this.shoot = false;
+                            switch (this.direction) {
+                            case Crafty.keys.LEFT_ARROW:
+                                Crafty.e("2D, DOM, Color, Collision, Bullet").attr({
+                                    x: this.x + 10,
+                                    y: this.y + 10,
+                                    w: 5,
+                                    h: 5
+                                }).color("red").bullet("w");
+                                break;
+                            case Crafty.keys.RIGHT_ARROW:
+                                Crafty.e("2D, DOM, Color, Collision, Bullet").attr({
+                                    x: this.x + 10,
+                                    y: this.y + 10,
+                                    w: 5,
+                                    h: 5
+                                }).color("red").bullet("e");
+                                break;
+                            case Crafty.keys.UP_ARROW:
+                                Crafty.e("2D, DOM, Color, Collision, Bullet").attr({
+                                    x: this.x + 10,
+                                    y: this.y + 10,
+                                    w: 5,
+                                    h: 5
+                                }).color("red").bullet("n");
+                                break;
+                            case Crafty.keys.DOWN_ARROW:
+                                Crafty.e("2D, DOM, Color, Collision, Bullet").attr({
+                                    x: this.x + 10,
+                                    y: this.y + 10,
+                                    w: 5,
+                                    h: 5
+                                }).color("red").bullet("s");
+                                break;
                             }
-
+                            //var old = this.pos();
+                            //this.trigger("change", old);
                         }
                     }
 
@@ -298,13 +292,6 @@
         getGhostCount: function () {
             return this.ghostCount;
         },
-
-        fire: function () {
-            this.shoot = false;
-        },
-
-
-
 
         updateAnimation: function () {
             if (this.direction === Crafty.keys.DOWN_ARROW) {
