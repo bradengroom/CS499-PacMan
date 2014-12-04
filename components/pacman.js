@@ -185,7 +185,7 @@
                         //this is where lasers come from.. the spacebar
                         if ((e.keyCode) === Crafty.keys.SPACE) {
                             var dir;
-                            Crafty.audio.play('munch');
+                            Crafty.audio.play('laser');
 
                             switch (this.direction) {
                             case Crafty.keys.LEFT_ARROW:
