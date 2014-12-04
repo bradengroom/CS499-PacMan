@@ -208,8 +208,7 @@
                                     x: this.getXCoord(),
                                     y: this.getYCoord(),
                                     w: 5,
-                                    h: 2,
-                                    z: 50
+                                    h: 2
                                 }).color("red")
                                 .bullet(this.dir);
                                 var old = this.pos();
