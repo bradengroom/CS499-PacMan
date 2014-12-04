@@ -179,42 +179,54 @@
                             //update the variable
                             this.keyPressed = e.keyCode;
                         }
+                        
+                        //this is where lasers come from.. the spacebar
                         if ((e.keyCode) === Crafty.keys.SPACE) {
                             
                             var dir;
                             
                             if (!this.shoot) {
                                 this.shoot = true;
-                                //this.delay(fire(), 100, 0);
-
                                 Crafty.audio.play('munch');
 
                                 switch (this.direction) {
                                     case Crafty.keys.LEFT_ARROW:
-                                        this.dir = "w";
+                                        Crafty.e("2D, DOM, Color, bullet").attr({
+                                            x: this.x + 10,
+                                            y: this.y + 10,
+                                            w: 5,
+                                            h: 5
+                                        }).color("red").move("w", 15);
                                         break;
                                     case Crafty.keys.RIGHT_ARROW:
-                                        this.dir = "e";
+                                        Crafty.e("2D, DOM, Color, bullet").attr({
+                                            x: this.x + 10,
+                                            y: this.y + 10,
+                                            w: 5,
+                                            h: 5
+                                        }).color("red").move("e", 15);
                                         break;
                                     case Crafty.keys.UP_ARROW:
-                                        this.dir = "n";
+                                        Crafty.e("2D, DOM, Color, bullet").attr({
+                                            x: this.x + 10,
+                                            y: this.y + 10,
+                                            w: 5,
+                                            h: 5
+                                        }).color("red").move("n", 15);
                                         break;
                                     case Crafty.keys.DOWN_ARROW:
-                                        this.dir = "s";
+                                        Crafty.e("2D, DOM, Color, bullet").attr({
+                                            x: this.x + 10,
+                                            y: this.y + 10,
+                                            w: 5,
+                                            h: 5
+                                        }).color("red").move("n", 15);
                                         break;
                                 }
-
-                                Crafty.e("2D, DOM, Color, bullet").attr({
-                                    x: this.getXCoord(),
-                                    y: this.getYCoord(),
-                                    w: 5,
-                                    h: 2
-                                }).color("red")
-                                .bullet(this.dir);
                                 var old = this.pos();
                                 this.trigger("change", old);
 
-                                this.shoot = true;
+                                this.shoot = false;
                             }
 
                         }
